@@ -218,7 +218,8 @@ if ($result === 0) {
 ```
 
 <h2>Relevansi dengan Pemrosesan Data Terdistribusi</h2> 
-HiPet! dirancang untuk memenuhi prinsip-prinsip dasar Pemrosesan Data Terdistribusi:
+HiPet! dirancang untuk memenuhi prinsip-prinsip dasar Pemrosesan Data Terdistribusi:   
+
 1. **Konsistensi**  
    Dicapai melalui penggunaan prosedur dan fungsi terpusat di dalam basis data.
 
