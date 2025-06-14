@@ -71,12 +71,14 @@ Dengan menyimpan logic ini langsung di dalam database, sistem HiPet! dapat menja
 ___  
 
 <h2>Trigger</h2>
+![image](https://github.com/user-attachments/assets/aa456d81-6cb1-4d19-b794-d52f42c04333)
+
 Trigger pada sistem HiPet! berfungsi sebagai pengaman otomatis yang aktif ketika terjadi aksi tertentu pada tabel—baik sebelum (BEFORE) maupun sesudah (AFTER) peristiwa seperti INSERT, UPDATE, atau DELETE. Seperti palang pintu digital, trigger memastikan hanya data yang valid dan sesuai aturan yang diizinkan masuk atau keluar.
 
 Trigger
 Beberapa trigger berikut berperan krusial dalam menjaga integritas dan konsistensi sistem HiPet!:
 
-📌 tr_auto_create_payment
+**tr_auto_create_payment**
 Aktif Saat: AFTER UPDATE pada tabel bookings
 Fungsi:
 Secara otomatis membuat data pembayaran jika status booking berubah menjadi confirmed.
@@ -88,7 +90,7 @@ IF OLD.status != 'confirmed' AND NEW.status = 'confirmed' THEN
 END IF;
 ```
 
-📌 tr_booking_status_update
+**tr_booking_status_update**
 Aktif Saat: BEFORE UPDATE pada tabel bookings
 Fungsi:
 Memperbarui kolom updated_at setiap kali status booking berubah, dan secara otomatis:
@@ -107,18 +109,25 @@ IF OLD.status != NEW.status THEN
 END IF;
 ```
 
-📌 tr_prevent_booking_deletion
-Aktif Saat: BEFORE DELETE pada tabel bookings
+**tr_update_schedule_on_delete**
+Aktif Saat: AFTER DELETE pada tabel bookings
 Fungsi:
-Mencegah penghapusan booking yang sudah memiliki pembayaran.
+Setelah booking dihapus, kapasitas jadwal (schedule) dikurangi otomatis agar kembali tersedia.
 
 ```
--- Cegah penghapusan booking jika sudah ada pembayaran
-SELECT COUNT(*) INTO payment_count FROM payments WHERE booking_id = OLD.booking_id;
-IF payment_count > 0 THEN
-    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Cannot delete booking with existing payments';
-END IF;
+-- Kembalikan slot jadwal jika booking dihapus
+UPDATE schedules 
+SET current_bookings = current_bookings - 1 
+WHERE schedule_id = OLD.schedule_id;
 ```
+
+
+**Catatan**
+Walaupun tidak ada trigger eksplisit bernama validate_transaction dalam sistem ini seperti pada template perbankan, fungsi-fungsi validasi dilakukan melalui:
+1. Stored Procedure (CreateBooking) → Mengecek ketersediaan jadwal, validasi kapasitas, dan harga layanan.
+2. Trigger → Menjaga integritas data booking, pembayaran, dan jadwal.
+Dengan sistem trigger yang ditanam langsung di database, HiPet! menjamin bahwa validasi dan automasi tetap berjalan meskipun terjadi bug atau kelalaian dari sisi aplikasi.
+
 
 
 <h2>Transaction</h2>
