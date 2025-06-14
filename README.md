@@ -1,7 +1,7 @@
-**🐾 HiPet! – Sistem Booking Grooming Hewan**
+<h1>**🐾 HiPet! – Sistem Booking Grooming Hewan**</h1>
 ___
 
-**Deskripsi Umum Sistem**
+<h2>**Deskripsi Umum Sistem**</h2>
 HiPet! merupakan aplikasi berbasis web yang dikembangkan untuk memfasilitasi proses pemesanan layanan grooming hewan peliharaan secara efisien dan terintegrasi. Sistem ini dibangun menggunakan bahasa pemrograman PHP, HTML, dan CSS dengan basis data MySQL, dan memanfaatkan fitur-fitur pemrosesan data tingkat lanjut seperti stored procedure, trigger, transaction, dan stored function.
 
 Penggunaan fitur-fitur ini ditujukan untuk memastikan bahwa seluruh proses bisnis yang terjadi di dalam sistem memiliki konsistensi, keandalan, dan integritas data, terutama dalam konteks sistem multi-user atau terdistribusi.
@@ -12,10 +12,10 @@ Penggunaan fitur-fitur ini ditujukan untuk memastikan bahwa seluruh proses bisni
 
 ___
 
-**Komponen Utama**
+<h2>**Komponen Utama**</h2>
 ___
 
-**Stored Procedure**  
+<h2>**Stored Procedure**</h2>  
 Stored procedure dalam sistem HiPet! bertindak sebagai alur otomatisasi operasi penting yang disimpan di dalam database. Dengan begitu, sistem dapat menjamin konsistensi data, efisiensi proses, dan keamanan integritas informasi, bahkan saat digunakan oleh banyak pengguna secara bersamaan.
 
 ![Screenshot 2025-06-14 111913](https://github.com/user-attachments/assets/7b02979c-a5d6-4489-98c6-a12629de4c04)
@@ -73,11 +73,11 @@ $stmt->execute([
 Dengan menyimpan logic ini langsung di dalam database, sistem HiPet! dapat menjaga integritas transaksi meskipun terjadi error di aplikasi. Semua perubahan krusial terjadi dalam satu transaksi atomik, memastikan sistem tetap reliable dan robust.  
 ___  
 
-**Trigger**
+<h2>**Trigger**</h2>
 
-**Transaction**
+<h2>**Transaction**</h2>
 
-**Stored Function**  
+<h2>**Stored Function**</h2>  
 Stored function dalam sistem HiPet! digunakan untuk mengambil data tanpa mengubah isi database. Ibaratnya seperti layar monitor: hanya menampilkan informasi penting, bukan mengubahnya.  
 
 ![Screenshot 2025-06-14 113912](https://github.com/user-attachments/assets/244a44e2-4a30-46b2-94f6-463950023580)  
@@ -126,7 +126,7 @@ _Manfaat Penggunaan Stored Function_
 2. Konsistensi antar sistem: baik aplikasi maupun procedure mengacu pada fungsi yang sama.
 3. Cocok untuk sistem terdistribusi: logika tidak bergantung pada client, semua dikontrol oleh database layer.
 
-**Backup**   
+<h2>**Backup**</h2>   
 Sistem dilengkapi dengan fitur backup otomatis yang dijalankan secara terjadwal menggunakan task scheduler. Backup dilakukan menggunakan utilitas mysqldump, dan disimpan ke direktori storage/backups/.
 
 ```
@@ -160,7 +160,7 @@ if ($result === 0) {
 ?>
 ```
 
-<h1>**Relevansi dengan Pemrosesan Data Terdistribusi**</h1> 
+<h2>**Relevansi dengan Pemrosesan Data Terdistribusi**</h2> 
 HiPet! dirancang untuk memenuhi prinsip-prinsip dasar Pemrosesan Data Terdistribusi:
 
 Konsistensi: Dicapai melalui penggunaan prosedur dan fungsi terpusat di dalam basis data.
