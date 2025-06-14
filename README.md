@@ -71,7 +71,7 @@ Dengan menyimpan logic ini langsung di dalam database, sistem HiPet! dapat menja
 ___  
 
 <h2>Trigger</h2>
-![image](https://github.com/user-attachments/assets/aa456d81-6cb1-4d19-b794-d52f42c04333)
+![trigger](https://github.com/user-attachments/assets/d57b0816-3508-4a0a-8b80-74b02d55a631)
 
 Trigger pada sistem HiPet! berfungsi sebagai pengaman otomatis yang aktif ketika terjadi aksi tertentu pada tabel—baik sebelum (BEFORE) maupun sesudah (AFTER) peristiwa seperti INSERT, UPDATE, atau DELETE. Seperti palang pintu digital, trigger memastikan hanya data yang valid dan sesuai aturan yang diizinkan masuk atau keluar.
 
