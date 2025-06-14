@@ -145,6 +145,24 @@ $conn->rollBack();
 ```
 Dengan implementasi ini, sistem memastikan bahwa proses booking hanya berhasil jika semua langkah dijalankan dengan sukses. Jika salah satu gagal (misalnya kapasitas jadwal penuh), maka semua perubahan akan dibatalkan.
 
+Perubahan status pemesanan (misalnya dari 'confirmed' menjadi 'cancelled') memiliki konsekuensi penting, seperti:
+1. Menyesuaikan kapasitas jadwal.
+2. Mencatat riwayat perubahan (audit trail).
+3. Mencegah pembatalan ganda.
+Untuk itu, digunakan stored procedure UpdateBookingStatus yang berisi transaksi SQL seperti berikut:
+```
+BEGIN
+DECLARE EXIT HANDLER FOR SQLEXCEPTION BEGIN ROLLBACK; END;
+START TRANSACTION;
+-- Ambil data lama
+-- Update status booking
+-- Update jadwal jika dibatalkan
+-- Simpan histori perubahan
+COMMIT;
+END;
+```
+
+
 <h2>Stored Function</h2>  
 Stored function dalam sistem HiPet! digunakan untuk mengambil data tanpa mengubah isi database. Ibaratnya seperti layar monitor: hanya menampilkan informasi penting, bukan mengubahnya.  
 
