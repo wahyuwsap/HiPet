@@ -71,9 +71,44 @@ Dengan menyimpan logic ini langsung di dalam database, sistem HiPet! dapat menja
 ___  
 
 <h2>Trigger</h2>
+Trigger pada sistem HiPet! berfungsi sebagai pengaman otomatis yang aktif ketika terjadi aksi tertentu pada tabel—baik sebelum (BEFORE) maupun sesudah (AFTER) peristiwa seperti INSERT, UPDATE, atau DELETE. Seperti palang pintu digital, trigger memastikan hanya data yang valid dan sesuai aturan yang diizinkan masuk atau keluar.
+
+Trigger
+Beberapa trigger berikut berperan krusial dalam menjaga integritas dan konsistensi sistem HiPet!:
+
+📌 tr_auto_create_payment
+Aktif Saat: AFTER UPDATE pada tabel bookings
+Fungsi:
+Secara otomatis membuat data pembayaran jika status booking berubah menjadi confirmed.
+```
+-- Otomatis membuat pembayaran ketika booking dikonfirmasi
+IF OLD.status != 'confirmed' AND NEW.status = 'confirmed' THEN
+    INSERT INTO payments (booking_id, amount, payment_method, status)
+    VALUES (NEW.booking_id, NEW.total_price, 'cash', 'pending');
+END IF;
+```
+📌 tr_booking_status_update
+Aktif Saat: BEFORE UPDATE pada tabel bookings
+Fungsi:
+Memperbarui kolom updated_at setiap kali status booking berubah, dan secara otomatis:
+1. Menandai payment_status = 'paid' jika booking selesai.
+2. Menandai payment_status = 'refunded' jika dibatalkan dan sudah dibayar.
+```
+-- Update waktu dan status pembayaran otomatis saat status booking berubah
+IF OLD.status != NEW.status THEN
+    SET NEW.updated_at = CURRENT_TIMESTAMP;
+    
+    IF NEW.status = 'completed' AND NEW.payment_status = 'unpaid' THEN
+        SET NEW.payment_status = 'paid';
+    ELSEIF NEW.status = 'cancelled' AND NEW.payment_status = 'paid' THEN
+        SET NEW.payment_status = 'refunded';
+    END IF;
+END IF;
+```
+
 
 <h2>Transaction</h2>
-Trigger pada sistem HiPet! berfungsi sebagai pengaman otomatis yang aktif ketika terjadi aksi tertentu pada tabel—baik sebelum (BEFORE) maupun sesudah (AFTER) peristiwa seperti INSERT, UPDATE, atau DELETE. Seperti palang pintu digital, trigger memastikan hanya data yang valid dan sesuai aturan yang diizinkan masuk atau keluar.
+
 
 <h2>Stored Function</h2>  
 Stored function dalam sistem HiPet! digunakan untuk mengambil data tanpa mengubah isi database. Ibaratnya seperti layar monitor: hanya menampilkan informasi penting, bukan mengubahnya.  
