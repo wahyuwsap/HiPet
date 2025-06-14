@@ -79,6 +79,7 @@ Stored function dalam sistem HiPet! digunakan untuk mengambil data tanpa menguba
 ![Screenshot 2025-06-14 113912](https://github.com/user-attachments/assets/244a44e2-4a30-46b2-94f6-463950023580)  
 
 Dengan stored function, logika pengambilan data tertentu menjadi konsisten dan terpusat, baik saat digunakan oleh aplikasi maupun oleh stored procedure lain. Beberapa Function yang kami gunakan adalah:  
+
 **1. GetTotalRevenue(start_date, end_date)**  
 Mengembalikan total pemasukan dari semua booking yang telah selesai dan dibayar, dalam rentang tanggal tertentu.  
 
