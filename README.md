@@ -73,6 +73,7 @@ ___
 <h2>Trigger</h2>
 
 <h2>Transaction</h2>
+Trigger pada sistem HiPet! berfungsi sebagai pengaman otomatis yang aktif ketika terjadi aksi tertentu pada tabel—baik sebelum (BEFORE) maupun sesudah (AFTER) peristiwa seperti INSERT, UPDATE, atau DELETE. Seperti palang pintu digital, trigger memastikan hanya data yang valid dan sesuai aturan yang diizinkan masuk atau keluar.
 
 <h2>Stored Function</h2>  
 Stored function dalam sistem HiPet! digunakan untuk mengambil data tanpa mengubah isi database. Ibaratnya seperti layar monitor: hanya menampilkan informasi penting, bukan mengubahnya.  
