@@ -71,7 +71,8 @@ Dengan menyimpan logic ini langsung di dalam database, sistem HiPet! dapat menja
 ___  
 
 <h2>Trigger</h2>
-![trigger](https://github.com/user-attachments/assets/d57b0816-3508-4a0a-8b80-74b02d55a631)
+
+![Screenshot 2025-06-14 122921](https://github.com/user-attachments/assets/553cbe29-76ce-41cb-9f8e-304ecae05666)
 
 Trigger pada sistem HiPet! berfungsi sebagai pengaman otomatis yang aktif ketika terjadi aksi tertentu pada tabel—baik sebelum (BEFORE) maupun sesudah (AFTER) peristiwa seperti INSERT, UPDATE, atau DELETE. Seperti palang pintu digital, trigger memastikan hanya data yang valid dan sesuai aturan yang diizinkan masuk atau keluar.
 
@@ -218,6 +219,12 @@ if ($result === 0) {
 
 <h2>Relevansi dengan Pemrosesan Data Terdistribusi</h2> 
 HiPet! dirancang untuk memenuhi prinsip-prinsip dasar Pemrosesan Data Terdistribusi:
-1. Konsistensi: Dicapai melalui penggunaan prosedur dan fungsi terpusat di dalam basis data.  
-2. Reliabilitas: Sistem tetap dapat menjaga integritas data meskipun terdapat gangguan di sisi aplikasi.  
-3. Integritas: Dengan adanya trigger dan validasi di level database, sistem tetap aman dari manipulasi data yang tidak sah.  
+1. **Konsistensi**  
+   Dicapai melalui penggunaan prosedur dan fungsi terpusat di dalam basis data.
+
+2. **Reliabilitas**  
+   Sistem tetap dapat menjaga integritas data meskipun terdapat gangguan di sisi aplikasi.
+
+3. **Integritas**  
+   Dengan adanya trigger dan validasi di level database, sistem tetap aman dari manipulasi data yang tidak sah.
+ 
