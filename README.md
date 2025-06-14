@@ -71,4 +71,52 @@ $stmt->execute([
 ```
 
 Dengan menyimpan logic ini langsung di dalam database, sistem HiPet! dapat menjaga integritas transaksi meskipun terjadi error di aplikasi. Semua perubahan krusial terjadi dalam satu transaksi atomik, memastikan sistem tetap reliable dan robust.  
-___
+___  
+
+_Stored Function_  
+Stored function dalam sistem HiPet! digunakan untuk mengambil data tanpa mengubah isi database. Ibaratnya seperti layar monitor: hanya menampilkan informasi penting, bukan mengubahnya.  
+
+![Screenshot 2025-06-14 113912](https://github.com/user-attachments/assets/244a44e2-4a30-46b2-94f6-463950023580)  
+
+Dengan stored function, logika pengambilan data tertentu menjadi konsisten dan terpusat, baik saat digunakan oleh aplikasi maupun oleh stored procedure lain. Beberapa Function yang kami gunakan adalah:  
+**1. GetTotalRevenue(start_date, end_date)**  
+Mengembalikan total pemasukan dari semua booking yang telah selesai dan dibayar, dalam rentang tanggal tertentu.  
+
+```
+Contoh penggunaan di aplikasi (PHP):  
+$stmt = $conn->prepare("SELECT GetTotalRevenue(?, ?) AS revenue");
+$stmt->execute([$startDate, $endDate]);
+$row = $stmt->fetch(PDO::FETCH_ASSOC);  
+
+Contoh penggunaan di procedure atau query:  
+SELECT GetTotalRevenue('2025-06-01', '2025-06-10');
+```
+
+**2. GetUserBookingCount(p_user_id, p_status)**  
+Mengembalikan jumlah booking user berdasarkan status tertentu (misalnya: pending, completed, dll). Jika p_status bernilai NULL, maka akan dihitung semua status.  
+```
+Contoh penggunaan:
+$stmt = $conn->prepare("SELECT GetUserBookingCount(?, ?) AS booking_count");
+$stmt->execute([$userId, 'completed']);  
+
+Di database:
+SELECT GetUserBookingCount(2, 'completed');
+```
+
+**3. IsScheduleAvailable(p_schedule_id)**  
+Memeriksa apakah suatu jadwal masih tersedia untuk booking. Mengembalikan nilai TRUE atau FALSE.  
+```
+Contoh penggunaan:
+$stmt = $conn->prepare("SELECT IsScheduleAvailable(?) AS available");
+$stmt->execute([$scheduleId]);
+
+Dalam procedure CreateBooking:
+IF v_is_active = TRUE AND v_current_bookings < v_max_capacity THEN
+    SET is_available = TRUE;
+END IF;
+```
+
+_Manfaat Penggunaan Stored Function_
+1. Pusat logika bisnis baca-tulis: tidak perlu mengulang kode di tiap tempat.
+2. Konsistensi antar sistem: baik aplikasi maupun procedure mengacu pada fungsi yang sama.
+3. Cocok untuk sistem terdistribusi: logika tidak bergantung pada client, semua dikontrol oleh database layer.
