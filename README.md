@@ -11,7 +11,6 @@ Penggunaan fitur-fitur ini ditujukan untuk memastikan bahwa seluruh proses bisni
 
 
 <h2>Komponen Utama</h2>
-___
 
 <h2>Stored Procedure</h2>  
 Stored procedure dalam sistem HiPet! bertindak sebagai alur otomatisasi operasi penting yang disimpan di dalam database. Dengan begitu, sistem dapat menjamin konsistensi data, efisiensi proses, dan keamanan integritas informasi, bahkan saat digunakan oleh banyak pengguna secara bersamaan.
