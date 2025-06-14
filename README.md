@@ -127,7 +127,6 @@ _Manfaat Penggunaan Stored Function_
 3. Cocok untuk sistem terdistribusi: logika tidak bergantung pada client, semua dikontrol oleh database layer.
 
 _Backup_
-
 Sistem dilengkapi dengan fitur backup otomatis yang dijalankan secara terjadwal menggunakan task scheduler. Backup dilakukan menggunakan utilitas mysqldump, dan disimpan ke direktori storage/backups/.
 
 ```
