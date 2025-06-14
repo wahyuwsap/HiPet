@@ -22,7 +22,7 @@ Stored procedure dalam sistem HiPet! bertindak sebagai alur otomatisasi operasi 
 
 Beberapa Procedure yang kami gunakan adalah:
 
-1. CreateBooking
+**1. CreateBooking**  
 Membuat data booking baru, mengecek ketersediaan jadwal, menghitung harga layanan, mengupdate kapasitas, dan mencatat histori booking.
 ```// Call the CreateBooking stored procedure
 $stmt = $conn->prepare("CALL CreateBooking(?, ?, ?, ?, ?, ?, @p_booking_id, @p_result)");
@@ -33,4 +33,5 @@ $stmt->execute([
     $scheduleId,
     $appointmentDatetime,
     $notes
-]);```
+]);```  
+
