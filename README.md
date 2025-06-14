@@ -1,7 +1,7 @@
-**🐾 HiPet! – Sistem Booking Grooming Hewan**
+**#🐾 HiPet! – Sistem Booking Grooming Hewan**
 ___
 
-_Deskripsi Umum Sistem_
+_Deskripsi Umum Sistem_  
 HiPet! merupakan aplikasi berbasis web yang dikembangkan untuk memfasilitasi proses pemesanan layanan grooming hewan peliharaan secara efisien dan terintegrasi. Sistem ini dibangun menggunakan bahasa pemrograman PHP, HTML, dan CSS dengan basis data MySQL, dan memanfaatkan fitur-fitur pemrosesan data tingkat lanjut seperti stored procedure, trigger, transaction, dan stored function.
 
 Penggunaan fitur-fitur ini ditujukan untuk memastikan bahwa seluruh proses bisnis yang terjadi di dalam sistem memiliki konsistensi, keandalan, dan integritas data, terutama dalam konteks sistem multi-user atau terdistribusi.
@@ -15,7 +15,7 @@ ___
 **Komponen Utama**
 ___
 
-_Stored Procedure_
+_Stored Procedure_  
 Stored procedure dalam sistem HiPet! bertindak sebagai alur otomatisasi operasi penting yang disimpan di dalam database. Dengan begitu, sistem dapat menjamin konsistensi data, efisiensi proses, dan keamanan integritas informasi, bahkan saat digunakan oleh banyak pengguna secara bersamaan.
 
 ![Screenshot 2025-06-14 111913](https://github.com/user-attachments/assets/7b02979c-a5d6-4489-98c6-a12629de4c04)
