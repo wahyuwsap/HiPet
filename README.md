@@ -77,12 +77,11 @@ ___
 Trigger pada sistem HiPet! berfungsi sebagai pengaman otomatis yang aktif ketika terjadi aksi tertentu pada tabel—baik sebelum (BEFORE) maupun sesudah (AFTER) peristiwa seperti INSERT, UPDATE, atau DELETE. Seperti palang pintu digital, trigger memastikan hanya data yang valid dan sesuai aturan yang diizinkan masuk atau keluar.
 
 Trigger
-Beberapa trigger berikut berperan krusial dalam menjaga integritas dan konsistensi sistem HiPet!:
+Beberapa trigger berikut berperan krusial dalam menjaga integritas dan konsistensi sistem HiPet!:  
 
-**tr_auto_create_payment**
-Aktif Saat: AFTER UPDATE pada tabel bookings
-Fungsi:
-Secara otomatis membuat data pembayaran jika status booking berubah menjadi confirmed.
+**1. tr_auto_create_payment**  
+Aktif Saat: AFTER UPDATE pada tabel bookings  
+Fungsi: Secara otomatis membuat data pembayaran jika status booking berubah menjadi confirmed.  
 ```
 -- Otomatis membuat pembayaran ketika booking dikonfirmasi
 IF OLD.status != 'confirmed' AND NEW.status = 'confirmed' THEN
@@ -91,10 +90,10 @@ IF OLD.status != 'confirmed' AND NEW.status = 'confirmed' THEN
 END IF;
 ```
 
-**tr_booking_status_update**
-Aktif Saat: BEFORE UPDATE pada tabel bookings
-Fungsi:
-Memperbarui kolom updated_at setiap kali status booking berubah, dan secara otomatis:
+**2. tr_booking_status_update**  
+Aktif Saat: BEFORE UPDATE pada tabel bookings  
+Fungsi:  
+Memperbarui kolom updated_at setiap kali status booking berubah, dan secara otomatis:  
 1. Menandai payment_status = 'paid' jika booking selesai.
 2. Menandai payment_status = 'refunded' jika dibatalkan dan sudah dibayar.
 ```
@@ -110,11 +109,9 @@ IF OLD.status != NEW.status THEN
 END IF;
 ```
 
-**tr_update_schedule_on_delete**
-Aktif Saat: AFTER DELETE pada tabel bookings
-Fungsi:
-Setelah booking dihapus, kapasitas jadwal (schedule) dikurangi otomatis agar kembali tersedia.
-
+**3. tr_update_schedule_on_delete**   
+Aktif Saat: AFTER DELETE pada tabel bookings   
+Fungsi: Setelah booking dihapus, kapasitas jadwal (schedule) dikurangi otomatis agar kembali tersedia.  
 ```
 -- Kembalikan slot jadwal jika booking dihapus
 UPDATE schedules 
@@ -123,11 +120,11 @@ WHERE schedule_id = OLD.schedule_id;
 ```
 
 
-**Catatan**
-Walaupun tidak ada trigger eksplisit bernama validate_transaction dalam sistem ini seperti pada template perbankan, fungsi-fungsi validasi dilakukan melalui:
+**Catatan**   
+Walaupun tidak ada trigger eksplisit bernama validate_transaction dalam sistem ini seperti pada template perbankan, fungsi-fungsi validasi dilakukan melalui:   
 1. Stored Procedure (CreateBooking) → Mengecek ketersediaan jadwal, validasi kapasitas, dan harga layanan.
-2. Trigger → Menjaga integritas data booking, pembayaran, dan jadwal.
-Dengan sistem trigger yang ditanam langsung di database, HiPet! menjamin bahwa validasi dan automasi tetap berjalan meskipun terjadi bug atau kelalaian dari sisi aplikasi.
+2. 2. Trigger → Menjaga integritas data booking, pembayaran, dan jadwal.
+   3. Dengan sistem trigger yang ditanam langsung di database, HiPet! menjamin bahwa validasi dan automasi tetap berjalan meskipun terjadi bug atau kelalaian dari sisi aplikasi.
 
 
 
