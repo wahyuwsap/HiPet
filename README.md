@@ -209,15 +209,6 @@ if ($result === 0) {
 
 <h2>Relevansi dengan Pemrosesan Data Terdistribusi</h2> 
 HiPet! dirancang untuk memenuhi prinsip-prinsip dasar Pemrosesan Data Terdistribusi:
-
-Konsistensi: Dicapai melalui penggunaan prosedur dan fungsi terpusat di dalam basis data.
-
-Reliabilitas: Sistem tetap dapat menjaga integritas data meskipun terdapat gangguan di sisi aplikasi.
-
-Integritas: Dengan adanya trigger dan validasi di level database, sistem tetap aman dari manipulasi data yang tidak sah.
-
-
-
-
-
-
+1. Konsistensi: Dicapai melalui penggunaan prosedur dan fungsi terpusat di dalam basis data.
+2. Reliabilitas: Sistem tetap dapat menjaga integritas data meskipun terdapat gangguan di sisi aplikasi.
+3. Integritas: Dengan adanya trigger dan validasi di level database, sistem tetap aman dari manipulasi data yang tidak sah.
