@@ -87,6 +87,7 @@ IF OLD.status != 'confirmed' AND NEW.status = 'confirmed' THEN
     VALUES (NEW.booking_id, NEW.total_price, 'cash', 'pending');
 END IF;
 ```
+
 📌 tr_booking_status_update
 Aktif Saat: BEFORE UPDATE pada tabel bookings
 Fungsi:
@@ -103,6 +104,19 @@ IF OLD.status != NEW.status THEN
     ELSEIF NEW.status = 'cancelled' AND NEW.payment_status = 'paid' THEN
         SET NEW.payment_status = 'refunded';
     END IF;
+END IF;
+```
+
+📌 tr_prevent_booking_deletion
+Aktif Saat: BEFORE DELETE pada tabel bookings
+Fungsi:
+Mencegah penghapusan booking yang sudah memiliki pembayaran.
+
+```
+-- Cegah penghapusan booking jika sudah ada pembayaran
+SELECT COUNT(*) INTO payment_count FROM payments WHERE booking_id = OLD.booking_id;
+IF payment_count > 0 THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Cannot delete booking with existing payments';
 END IF;
 ```
 
