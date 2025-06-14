@@ -123,8 +123,8 @@ WHERE schedule_id = OLD.schedule_id;
 **Catatan**   
 Walaupun tidak ada trigger eksplisit bernama validate_transaction dalam sistem ini seperti pada template perbankan, fungsi-fungsi validasi dilakukan melalui:   
 1. Stored Procedure (CreateBooking) → Mengecek ketersediaan jadwal, validasi kapasitas, dan harga layanan.
-2. 2. Trigger → Menjaga integritas data booking, pembayaran, dan jadwal.
-   3. Dengan sistem trigger yang ditanam langsung di database, HiPet! menjamin bahwa validasi dan automasi tetap berjalan meskipun terjadi bug atau kelalaian dari sisi aplikasi.
+2. Trigger → Menjaga integritas data booking, pembayaran, dan jadwal.
+3. Dengan sistem trigger yang ditanam langsung di database, HiPet! menjamin bahwa validasi dan automasi tetap berjalan meskipun terjadi bug atau kelalaian dari sisi aplikasi.
 
 
 
