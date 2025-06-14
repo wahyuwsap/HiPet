@@ -129,7 +129,21 @@ Walaupun tidak ada trigger eksplisit bernama validate_transaction dalam sistem i
 
 
 <h2>Transaction</h2>
+Setiap proses penting seperti pembuatan pemesanan (booking) dan perubahan status pemesanan dilakukan secara atomik menggunakan mekanisme transaksi (transaction). Tujuannya adalah untuk menjamin konsistensi dan integritas data, terutama dalam kondisi multi-user atau jika terjadi gangguan saat eksekusi. Fitur transaction diimplementasikan dengan kombinasi antara perintah START TRANSACTION, COMMIT, ROLLBACK, serta dukungan stored procedure di sisi database MySQL.
 
+Untuk itu, digunakan prosedur tersimpan (stored procedure) bernama CreateBooking yang dibungkus dalam satu transaksi. Implementasi PHP yang memanggil prosedur tersebut:
+```
+try {
+$conn->beginTransaction();
+$stmt = $conn->prepare("CALL CreateBooking(?, ?, ?, ?, ?, ?, @booking_id, @result)");
+$stmt->execute([$user_id, $pet_id, $service_id, $schedule_id, $datetime, $notes]);
+$conn->commit();
+} catch (PDOException $e) {
+$conn->rollBack();
+// Penanganan error
+}
+```
+Dengan implementasi ini, sistem memastikan bahwa proses booking hanya berhasil jika semua langkah dijalankan dengan sukses. Jika salah satu gagal (misalnya kapasitas jadwal penuh), maka semua perubahan akan dibatalkan.
 
 <h2>Stored Function</h2>  
 Stored function dalam sistem HiPet! digunakan untuk mengambil data tanpa mengubah isi database. Ibaratnya seperti layar monitor: hanya menampilkan informasi penting, bukan mengubahnya.  
