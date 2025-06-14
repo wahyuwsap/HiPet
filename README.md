@@ -23,18 +23,18 @@ Beberapa Procedure yang kami gunakan adalah:
 Membuat data booking baru, mengecek ketersediaan jadwal, menghitung harga layanan, mengupdate kapasitas, dan mencatat histori booking.  
 ```
 // Call the CreateBooking stored procedure
-$stmt = $conn->prepare("CALL CreateBooking(?, ?, ?, ?, ?, ?, @p_booking_id, @p_result)");
+$stmt = $conn->prepare("CALL CreateBooking(?, ?, ?, ?, ?, ?, @booking_id, @result)");
 $stmt->execute([
     $userId,
     $petId,
     $serviceId,
     $scheduleId,
-    $appointmentDatetime,
+    $datetime,
     $notes
 ]);  
 
 // Get output result
-$result = $conn->query("SELECT @p_booking_id AS booking_id, @p_result AS result")->fetch();
+$result = $conn->query("SELECT @booking_id AS booking_id, @result AS result")->fetch();
 ```  
 
 **2. CreateDatabaseBackup**  
