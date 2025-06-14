@@ -130,6 +130,8 @@ Walaupun tidak ada trigger eksplisit bernama validate_transaction dalam sistem i
 
 <h2>Transaction</h2>
 
+![image](https://github.com/user-attachments/assets/e238dadd-0962-476b-aac4-fc0799cfb429)
+
 ![image](https://github.com/user-attachments/assets/5dcec95b-e0a7-44c4-9ff9-570c1c0fe815)
 
 ![image](https://github.com/user-attachments/assets/f79d0ad3-89cd-4b59-a629-3fb35a8fd7a4)
