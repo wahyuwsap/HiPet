@@ -129,6 +129,11 @@ Walaupun tidak ada trigger eksplisit bernama validate_transaction dalam sistem i
 
 
 <h2>Transaction</h2>
+
+![image](https://github.com/user-attachments/assets/5dcec95b-e0a7-44c4-9ff9-570c1c0fe815)
+
+![image](https://github.com/user-attachments/assets/f79d0ad3-89cd-4b59-a629-3fb35a8fd7a4)
+
 Setiap proses penting seperti pembuatan pemesanan (booking) dan perubahan status pemesanan dilakukan secara atomik menggunakan mekanisme transaksi (transaction). Tujuannya adalah untuk menjamin konsistensi dan integritas data, terutama dalam kondisi multi-user atau jika terjadi gangguan saat eksekusi. Fitur transaction diimplementasikan dengan kombinasi antara perintah START TRANSACTION, COMMIT, ROLLBACK, serta dukungan stored procedure di sisi database MySQL.
 
 Untuk itu, digunakan prosedur tersimpan (stored procedure) bernama CreateBooking yang dibungkus dalam satu transaksi. Implementasi PHP yang memanggil prosedur tersebut:
