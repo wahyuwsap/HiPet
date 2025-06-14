@@ -1,4 +1,4 @@
-**🐾 # HiPet! – Sistem Booking Grooming Hewan**
+**🐾 HiPet! – Sistem Booking Grooming Hewan**
 ___
 
 _Deskripsi Umum Sistem_  
